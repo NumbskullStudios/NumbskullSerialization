@@ -19,9 +19,9 @@ Each method in the library returns a bool to indicate success or failure. More l
 
 The library includes three main object types for storing data from an object or actor:
 
-- Actor Data (Holds serialized data and the actor's transform)
-- Actor Proxy (Holds serialized data as well as class, name and transform)
-- Object Data (Holds only serialized data)
+- **Actor Data** (Holds serialized data and the actor's transform)
+- **Actor Proxy** (Holds serialized data as well as class, name and transform)
+- **Object Data** (Holds only serialized data)
 
 Methods like `SaveActor`, `SaveActorData` and `SaveObjectData` will return these storage types.
 
@@ -116,6 +116,52 @@ UNumbskullSerializationBPLibrary::LoadActor(GetWorld(), ActorProxy, ActorToLoad)
 ActorToLoad->AnyMethodAsTheActorIsLoaded();
 ```
 
-![Saving](Documentation/SavingExamples.png)
-![Loading](Documentation/LoadingExamples.png)
+## Full Saving and Loading Example
 
+**MyActor.h**
+
+```
+#include "NumbskullSerializationBPLibrary.h"
+
+class AMyActor : AActor, ISerializable
+{
+	virtual void OnSave_Implementation(const FString& GameName) override;
+	virtual void OnLoad_Implementation(const FString& GameName) override;
+};
+```
+
+**MyActor.cpp**
+
+```
+#include "MyActor.h"
+
+void AMyActor::OnSave_Implementation(const FString& GameName)
+{
+    FString FileName = GameName + TEXT("MyActor.dat");
+    
+    FActorData ActorData;
+    
+    UNumbskullSerializationBPLibrary::SaveActorData(this, ActorData);
+    UNumbskullSerializationBPLibrary::SaveObjectDataToDiskCompressed(FileName, ActorData);
+}
+
+void AMyActor::OnLoad_Implementation(const FString& GameName)
+{
+    FString FileName = GameName + TEXT("MyActor.dat");
+    
+    FActorData ActorData;
+
+    UNumbskullSerializationBPLibrary::LoadObjectDataFromDiskCompressed(FileName, ActorData);
+    UNumbskullSerializationBPLibrary::LoadObject(this, ActorData);
+}
+```
+
+## On Load Interface
+
+The library also includes a `PostLoadListener`. This interface allows an object to take action after its `Serialize` method is called. Intended for when you want to make sure all data has been loaded before proceeding.
+
+In _Beyond Binary_, the method is used to wait until a robot's appearance has been loaded. Once we have the specific limbs, we can update the visuals. Doing this in `BeginPlay` would result in a "prefab" looking robot.
+
+## New Game Interface
+
+Finally, the library includes a `NewGameListener`. The interface allows objects to react to a new game. An example could be giving the player default equipment.
