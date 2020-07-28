@@ -5,6 +5,12 @@ This plugin is currently used in the unreleased game _Beyond Binary_ by _Numbsku
 
 The majority of code sits inside the _NumbskullSerializationBPLibrary_ file with simple methods like _SaveActor_ and _SaveActorProxyToDisk_.
 
+**Warning:** This plugin does not try to solve file/path/game management. Saving and loading methods expect full file paths so the user must properly supply these.
+
+In _Beyond Binary_, the game instance collects all objects with the `Serializable` interface and passes the game name ("Game 1", for example).
+
+The interface objects then use methods in a `GamePaths` object to convert game names into paths ("/path/to/project/folder/Saved/Games/Game 1/").
+
 ![Features](Documentation/AllFeatures.png)
 
 ## Brief Overview
