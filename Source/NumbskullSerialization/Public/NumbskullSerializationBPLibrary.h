@@ -30,8 +30,6 @@ public:
     // GLOBAL
     //
     
-//    static void SaveGame(const UWorld* World, const FString& GameName)
-    
     /**
      * Serializes a UObject entirely and returns the serialized data.
      *
