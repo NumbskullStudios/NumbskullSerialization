@@ -61,7 +61,7 @@ public:
      * @return True if save was successful, false if otherwise
      */
     UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving")
-    static bool SaveBytesToDisk(const FString& InFileName, TArray<uint8>& InBytes);
+    static bool SaveBytesToDisk(const FString& InFileName, const TArray<uint8>& InBytes);
     
     /**
      * Loads a file into an array of bytes.
@@ -82,7 +82,7 @@ public:
      *
      * @return True if save was successful, false if otherwise
      */
-    static bool SaveArchiveToDisk(const FString& InFileName, FBufferArchive& InArchive);
+    static bool SaveArchiveToDisk(const FString& InFileName, const FBufferArchive& InArchive);
     
     /**
      * Compresses the archive before saving to disk.
@@ -92,7 +92,7 @@ public:
      *
      * @return True if save was successful, false if otherwise
      */
-    static bool SaveArchiveToDiskCompressed(const FString& InFileName, FBufferArchive& InArchive);
+    static bool SaveArchiveToDiskCompressed(const FString& InFileName, FBufferArchive InArchive);
     
 public:
     
@@ -124,7 +124,6 @@ public:
      *
      * @return True if load was successful, false if otherwise
      */
-    UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|Actors")
     static bool LoadActor(UWorld* World, const FActorProxy& InActorProxy, AActor*& OutLoadedActor);
     
     /**
@@ -158,7 +157,7 @@ public:
      * @return True if the save to disk was successful, false if otherwise
      */
     UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|ActorProxy|Compressed")
-    static bool SaveActorProxyToDiskCompressed(const FString& InFileName, FActorProxy& InActorProxy);
+    static bool SaveActorProxyToDiskCompressed(const FString& InFileName, FActorProxy InActorProxy);
     
     /**
      * Loads a compressed actor proxy from disk.
@@ -216,7 +215,7 @@ public:
      * @return True if successful, false if otherwise
      */
     UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|ObjectData")
-    static bool LoadObject(UObject* InObject, FObjectData& InObjectData);
+    static bool LoadObject(UObject* InObject, FObjectData InObjectData);
     
     /**
      * Saves an array of objects into an FObjectData object.
@@ -231,7 +230,7 @@ public:
      * @seealso SaveObject, LoadObject
      */
     UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|ObjectData")
-    static bool SaveObjects(TArray<UObject*> InObjects, FObjectData& InObjectData);
+    static bool SaveObjects(const TArray<UObject*>& InObjects, FObjectData& OutObjectData);
     
     /**
      * Loads an array of objects from an FObjectData object.
@@ -244,7 +243,7 @@ public:
      * @seealso SaveObject, LoadObject
      */
     UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|ObjectData")
-    static bool LoadObjects(TArray<UObject*> InObjects, FObjectData& InObjectData);
+    static bool LoadObjects(const TArray<UObject*>& InObjects, FObjectData InObjectData);
     
     /**
      * Save an object data struct to a file on disk.
@@ -255,7 +254,7 @@ public:
      * @return True if the save was successful, false if otherwise
      */
     UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|ObjectData")
-    static bool SaveObjectDataToDisk(const FString& InFileName, FObjectData& InObjectData);
+    static bool SaveObjectDataToDisk(const FString& InFileName, FObjectData InObjectData);
     
     /**
      * Load an object data struct from a file on disk.
@@ -277,7 +276,7 @@ public:
      * @return True if the save was successful, false if otherwise
      */
     UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|ObjectData|Compressed")
-    static bool SaveObjectDataToDiskCompressed(const FString& InFileName, FObjectData& InObjectData);
+    static bool SaveObjectDataToDiskCompressed(const FString& InFileName, FObjectData InObjectData);
     
     /**
      * Load a compressed object data struct from a file on disk.
@@ -331,7 +330,7 @@ public:
      * @return True if the save was successful, false if otherwise
      */
     UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|ActorData")
-    static bool SaveActorDataToDisk(const FString& InFileName, FActorData& InActorData);
+    static bool SaveActorDataToDisk(const FString& InFileName, FActorData InActorData);
     
     /**
      * Load an actor data struct from a file on disk.
@@ -353,7 +352,7 @@ public:
      * @return True if the save was successful, false if otherwise
      */
     UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|ActorData")
-    static bool SaveActorDataToDiskCompressed(const FString& InFileName, FActorData& InActorData);
+    static bool SaveActorDataToDiskCompressed(const FString& InFileName, FActorData InActorData);
     
     /**
      * Load an actor data struct from a file on disk.

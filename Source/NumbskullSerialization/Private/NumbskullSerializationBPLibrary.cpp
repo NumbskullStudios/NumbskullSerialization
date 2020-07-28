@@ -11,7 +11,7 @@
 #include "Serialization/MemoryReader.h"
 
 // UObject Serialization
-#include "ObjectAndNameAsStringProxyArchive.h"
+#include "Serialization/ObjectAndNameAsStringProxyArchive.h"
 
 // Compressed Serialization
 #include "Serialization/ArchiveSaveCompressedProxy.h"
@@ -19,10 +19,12 @@
 #include "Misc/CompressionFlags.h"
 
 // Unreal Types
+#include "Engine/Engine.h"
 #include "Engine/World.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/Pawn.h"
-
+#include "Runtime/Engine/Public/EngineGlobals.h"
+#include "Misc/FileHelper.h"
 
 DEFINE_LOG_CATEGORY(Serializer);
 
@@ -66,7 +68,7 @@ bool UNumbskullSerializationBPLibrary::ApplySerialization(const TArray<uint8>& S
     return true;
 }
 
-bool UNumbskullSerializationBPLibrary::SaveBytesToDisk(const FString& InFileName, TArray<uint8>& InBytes)
+bool UNumbskullSerializationBPLibrary::SaveBytesToDisk(const FString& InFileName, const TArray<uint8>& InBytes)
 {
     if (InBytes.Num() == 0)
     {
@@ -105,12 +107,12 @@ bool UNumbskullSerializationBPLibrary::LoadBytesFromDisk(const FString& InFileNa
     return true;
 }
 
-bool UNumbskullSerializationBPLibrary::SaveArchiveToDisk(const FString& InFileName, FBufferArchive& InArchive)
+bool UNumbskullSerializationBPLibrary::SaveArchiveToDisk(const FString& InFileName, const FBufferArchive& InArchive)
 {
     return SaveBytesToDisk(InFileName, InArchive);
 }
 
-bool UNumbskullSerializationBPLibrary::SaveArchiveToDiskCompressed(const FString& InFileName, FBufferArchive& InArchive)
+bool UNumbskullSerializationBPLibrary::SaveArchiveToDiskCompressed(const FString& InFileName, FBufferArchive InArchive)
 {
     TArray<uint8> CompressedData;
     FArchiveSaveCompressedProxy Compressor = FArchiveSaveCompressedProxy(CompressedData, NAME_Zlib);
@@ -212,7 +214,7 @@ bool UNumbskullSerializationBPLibrary::SaveActorProxyToDisk(const FString& InFil
     return SaveArchiveToDisk(InFileName, BinaryData);
 }
 
-bool UNumbskullSerializationBPLibrary::SaveActorProxyToDiskCompressed(const FString& InFileName, FActorProxy& InActorProxy)
+bool UNumbskullSerializationBPLibrary::SaveActorProxyToDiskCompressed(const FString& InFileName, FActorProxy InActorProxy)
 {
     FBufferArchive BinaryData;
     BinaryData << InActorProxy;
@@ -290,12 +292,12 @@ bool UNumbskullSerializationBPLibrary::SaveObject(UObject* InObject, FObjectData
     return true;
 }
 
-bool UNumbskullSerializationBPLibrary::LoadObject(UObject* InObject, FObjectData& InObjectData)
+bool UNumbskullSerializationBPLibrary::LoadObject(UObject* InObject, FObjectData InObjectData)
 {
     return ApplySerialization(InObjectData.Data, InObject);
 }
 
-bool UNumbskullSerializationBPLibrary::SaveObjects(TArray<UObject*> InObjects, FObjectData& OutObjectData)
+bool UNumbskullSerializationBPLibrary::SaveObjects(const TArray<UObject*>& InObjects, FObjectData& OutObjectData)
 {
     if (InObjects.Num() == 0)
     {
@@ -323,7 +325,7 @@ bool UNumbskullSerializationBPLibrary::SaveObjects(TArray<UObject*> InObjects, F
     return true;
 }
 
-bool UNumbskullSerializationBPLibrary::LoadObjects(TArray<UObject*> InObjects, FObjectData& InObjectData)
+bool UNumbskullSerializationBPLibrary::LoadObjects(const TArray<UObject*>& InObjects, FObjectData InObjectData)
 {
     if (InObjects.Num() == 0)
     {
@@ -357,7 +359,7 @@ bool UNumbskullSerializationBPLibrary::LoadObjects(TArray<UObject*> InObjects, F
     return true;
 }
 
-bool UNumbskullSerializationBPLibrary::SaveObjectDataToDisk(const FString& InFileName, FObjectData& InObjectData)
+bool UNumbskullSerializationBPLibrary::SaveObjectDataToDisk(const FString& InFileName, FObjectData InObjectData)
 {
     FBufferArchive BinaryData;
     BinaryData << InObjectData;
@@ -385,7 +387,7 @@ bool UNumbskullSerializationBPLibrary::LoadObjectDataFromDisk(const FString& InF
     return true;
 }
 
-bool UNumbskullSerializationBPLibrary::SaveObjectDataToDiskCompressed(const FString& InFileName, FObjectData& InObjectData)
+bool UNumbskullSerializationBPLibrary::SaveObjectDataToDiskCompressed(const FString& InFileName, FObjectData InObjectData)
 {
     FBufferArchive BinaryData;
     BinaryData << InObjectData;
@@ -448,7 +450,7 @@ bool UNumbskullSerializationBPLibrary::LoadActorData(AActor* InActorToLoad, cons
     return false;
 }
 
-bool UNumbskullSerializationBPLibrary::SaveActorDataToDisk(const FString& InFileName, FActorData& InActorData)
+bool UNumbskullSerializationBPLibrary::SaveActorDataToDisk(const FString& InFileName, FActorData InActorData)
 {
     FBufferArchive BinaryData;
     BinaryData << InActorData;
@@ -476,7 +478,7 @@ bool UNumbskullSerializationBPLibrary::LoadActorDataFromDisk(const FString& InFi
     return true;
 }
 
-bool UNumbskullSerializationBPLibrary::SaveActorDataToDiskCompressed(const FString& InFileName, FActorData& InActorData)
+bool UNumbskullSerializationBPLibrary::SaveActorDataToDiskCompressed(const FString& InFileName, FActorData InActorData)
 {
     FBufferArchive BinaryData;
     BinaryData << InActorData;

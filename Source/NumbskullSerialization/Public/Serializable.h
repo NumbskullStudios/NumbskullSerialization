@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Interface.h"
+#include "UObject/Interface.h"
 #include "Serializable.generated.h"
 
 UINTERFACE(BlueprintType)
