@@ -30,6 +30,8 @@ public:
     // GLOBAL
     //
     
+//    static void SaveGame(const UWorld* World, const FString& GameName)
+    
     /**
      * Serializes a UObject entirely and returns the serialized data.
      *
@@ -116,15 +118,16 @@ public:
     /**
      * Spawns and loads an actor from an actor proxy.
      *
-     * The resulting object will be an exact copy of the one saved.
+     * Uses the calling object to determine the world, rather than @see LoadActor, which explicity takes a UWorld parameter.
      *
-     * @param World World to spawn the actor into
-     * @param InActorProxy Actor proxy to load actor from
-     * @param OutLoadedActor The spawned and loaded actor.
+     * @param WorldContextObject Current world context
+     * @param InActorProxy Actor proxy to load.
+     * @param OutLoadedActor Spawned and loaded actor.
      *
      * @return True if load was successful, false if otherwise
      */
-    static bool LoadActor(UWorld* World, const FActorProxy& InActorProxy, AActor*& OutLoadedActor);
+    UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|Actors", meta=(WorldContext = "WorldContextObject"))
+    static bool LoadActor(const UObject* WorldContextObject, const FActorProxy& InActorProxy, AActor*& OutLoadedActor);
     
     /**
      * Takes an actor proxy and saves it to disk.
@@ -172,20 +175,7 @@ public:
     
 protected:
     
-    /**
-     * (Blueprint Version)
-     * Spawns and loads an actor from an actor proxy.
-     *
-     * Uses the calling object to determine the world, rather than @see LoadActor, which explicity takes a UWorld parameter.
-     *
-     * @param WorldContextObject Current world context
-     * @param InActorProxy Actor proxy to load.
-     * @param OutLoadedActor Spawned and loaded actor.
-     *
-     * @return True if load was successful, false if otherwise
-     */
-    UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|Actors", meta=(DisplayName = "Load Actor", WorldContext = "WorldContextObject"))
-    static bool LoadActorBlueprint(const UObject* WorldContextObject, const FActorProxy& InActorProxy, AActor*& OutLoadedActor);
+
     
 public:
     

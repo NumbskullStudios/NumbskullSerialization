@@ -167,8 +167,12 @@ bool UNumbskullSerializationBPLibrary::SaveActor(AActor* InActorToSave, FActorPr
     return false;
 }
 
-bool UNumbskullSerializationBPLibrary::LoadActor(UWorld* World, const FActorProxy& InActorProxy, AActor*& OutLoadedActor)
+bool UNumbskullSerializationBPLibrary::LoadActor(const UObject* WorldContextObject, const FActorProxy& InActorProxy, AActor*& OutLoadedActor)
 {
+    check(WorldContextObject);
+    
+    UWorld* const World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull);
+    
     check(World);
     check(!InActorProxy.ActorClass.IsEmpty());
     check(InActorProxy.ActorData.Num() > 0);
@@ -196,14 +200,6 @@ bool UNumbskullSerializationBPLibrary::LoadActor(UWorld* World, const FActorProx
     }
     UE_LOG(Serializer, Warning, TEXT("Couldn't spawn actor because the class couldn't be found"));
     return false;
-}
-
-bool UNumbskullSerializationBPLibrary::LoadActorBlueprint(const UObject* WorldContextObject, const FActorProxy& InActorProxy, AActor*& OutLoadedActor)
-{
-    check(WorldContextObject);
-    
-    UWorld* const World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull);
-    return LoadActor(World, InActorProxy, OutLoadedActor);
 }
 
 bool UNumbskullSerializationBPLibrary::SaveActorProxyToDisk(const FString& InFileName, FActorProxy InActorProxy)
