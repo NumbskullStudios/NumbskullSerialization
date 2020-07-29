@@ -171,10 +171,6 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Numbskull|Saving|ActorProxy|Compressed")
     static bool LoadActorProxyFromDiskCompressed(const FString& InFileName, FActorProxy& OutActorProxy);
     
-protected:
-    
-
-    
 public:
     
     //
