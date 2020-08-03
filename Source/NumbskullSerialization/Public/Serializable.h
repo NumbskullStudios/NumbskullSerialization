@@ -1,3 +1,5 @@
+// Copyright 2019-2020 James Kelly, Michael Burdge
+
 #pragma once
 
 #include "CoreMinimal.h"

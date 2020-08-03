@@ -1,4 +1,4 @@
-// Some copyright should be here...
+// Copyright 2019-2020 James Kelly, Michael Burdge
 
 using System.IO;
 using UnrealBuildTool;
