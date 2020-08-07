@@ -14,7 +14,7 @@ struct FObjectData
     GENERATED_BODY()
     
     /** Binary data to read back into an object or save to disk*/
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Numbskull)
 	TArray<uint8> Data;
     
     friend FArchive& operator << (FArchive& Ar, FObjectData& Object)
