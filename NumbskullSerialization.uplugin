@@ -18,7 +18,7 @@
 		{
 			"Name": "NumbskullSerialization",
 			"Type": "Runtime",
-			"LoadingPhase": "PreLoadingScreen",
+			"LoadingPhase": "Default",
             "WhitelistPlatforms": ["Win64", "Win32", "Linux", "Mac"]
 		}
 	]
