@@ -11,7 +11,7 @@
  * Stores information about the actor's class so the entire actor can be fully loaded from disk.
  */
 USTRUCT(BlueprintType)
-struct FActorProxy
+struct NUMBSKULLSERIALIZATION_API FActorProxy
 {
 	GENERATED_BODY()
 

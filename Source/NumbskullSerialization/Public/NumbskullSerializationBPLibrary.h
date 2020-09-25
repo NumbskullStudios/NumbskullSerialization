@@ -20,7 +20,7 @@ DECLARE_LOG_CATEGORY_EXTERN(Serializer, Log, All);
  * Contains all methods for serializing data and saving and loading from disk.
  */
 UCLASS()
-class UNumbskullSerializationBPLibrary : public UBlueprintFunctionLibrary
+class NUMBSKULLSERIALIZATION_API UNumbskullSerializationBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
     

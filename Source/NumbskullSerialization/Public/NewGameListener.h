@@ -7,7 +7,7 @@
 #include "NewGameListener.generated.h"
 
 UINTERFACE(BlueprintType)
-class UNewGameListener : public UInterface
+class NUMBSKULLSERIALIZATION_API UNewGameListener : public UInterface
 {
 	GENERATED_UINTERFACE_BODY()
 };
@@ -19,7 +19,7 @@ inline UNewGameListener::UNewGameListener(FObjectInitializer const& ObjectInitia
  * A new game being defined as the typical menu option 'New Game'.
  * Therefore, this interface won't be called every time a game is loaded.
  */
-class INewGameListener
+class NUMBSKULLSERIALIZATION_API INewGameListener
 {
 	GENERATED_IINTERFACE_BODY()
 

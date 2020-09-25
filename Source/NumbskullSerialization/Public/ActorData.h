@@ -10,7 +10,7 @@
  * Use ObjectData if you don't need to store the transform.
  */
 USTRUCT(BlueprintType)
-struct FActorData
+struct NUMBSKULLSERIALIZATION_API FActorData
 {
     GENERATED_BODY()
 

@@ -4,7 +4,7 @@
 
 #include "Modules/ModuleManager.h"
 
-class FNumbskullSerializationModule : public IModuleInterface
+class NUMBSKULLSERIALIZATION_API FNumbskullSerializationModule : public IModuleInterface
 {
 public:
 

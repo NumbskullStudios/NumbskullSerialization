@@ -7,7 +7,7 @@
 #include "PostLoadListener.generated.h"
 
 UINTERFACE(BlueprintType)
-class UPostLoadListener : public UInterface
+class NUMBSKULLSERIALIZATION_API UPostLoadListener : public UInterface
 {
     GENERATED_UINTERFACE_BODY()
 };
@@ -18,7 +18,7 @@ inline UPostLoadListener::UPostLoadListener(FObjectInitializer const& ObjectInit
  * This interface allows derived objects to run code once serialized data has been applied to it.
  * For example, the visibility of an actor is not saved by default. As an alternative, you could save a bool 'bInvisible' and reapply the visibility during the interface's PostLoad event.
  */
-class IPostLoadListener
+class NUMBSKULLSERIALIZATION_API IPostLoadListener
 {
     GENERATED_IINTERFACE_BODY()
     

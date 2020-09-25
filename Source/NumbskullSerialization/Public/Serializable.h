@@ -7,7 +7,7 @@
 #include "Serializable.generated.h"
 
 UINTERFACE(BlueprintType)
-class USerializable : public UInterface
+class NUMBSKULLSERIALIZATION_API USerializable : public UInterface
 {
     GENERATED_UINTERFACE_BODY()
 };
@@ -25,7 +25,7 @@ inline USerializable::USerializable(FObjectInitializer const& ObjectInitializer)
  * OnSaved -> All objects are saved. A game manager might listen to this to unpause the menu.
  * OnLoaded -> All objects are loaded. Useful if you wanted to wait for the player to receive their equipment.
  */
-class ISerializable
+class NUMBSKULLSERIALIZATION_API ISerializable
 {
     GENERATED_IINTERFACE_BODY()
     

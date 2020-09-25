@@ -9,7 +9,7 @@
  * Stores a TArray<uint8> captured (usually) from a UObject's Serialize method.
  */
 USTRUCT(BlueprintType)
-struct FObjectData
+struct NUMBSKULLSERIALIZATION_API FObjectData
 {
     GENERATED_BODY()
     
