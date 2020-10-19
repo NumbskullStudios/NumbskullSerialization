@@ -181,8 +181,14 @@ bool UNumbskullSerializationBPLibrary::LoadActor(const UObject* WorldContextObje
     SpawnParams.Name = InActorProxy.ActorName;
     SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
     SpawnParams.OverrideLevel = World->PersistentLevel;
+    SpawnParams.NameMode = FActorSpawnParameters::ESpawnActorNameMode::Requested;
     UClass* SpawnClass = FindObject<UClass>(ANY_PACKAGE, *InActorProxy.ActorClass);
-
+    
+    if (!SpawnClass)
+    {
+        SpawnClass = StaticLoadClass(AActor::StaticClass(), nullptr, *InActorProxy.ActorClass);
+    }
+    
     if (SpawnClass)
     {
         AActor* SpawnedActor = World->SpawnActor(SpawnClass, &InActorProxy.ActorTransform, SpawnParams);
