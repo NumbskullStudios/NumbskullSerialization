@@ -124,6 +124,29 @@ bool UNumbskullSerializationBPLibrary::SaveArchiveToDiskCompressed(const FString
     return SaveBytesToDisk(InFileName, CompressedData);
 }
 
+bool UNumbskullSerializationBPLibrary::DeleteFile(const FString& FilePath)
+{
+    IFileManager& FileManager = IFileManager::Get();
+
+    // Text file does not exist, ignore
+    if (!FileManager.FileExists(*FilePath))
+    {
+        UE_LOG(Serializer, Warning, TEXT("File does not exist at path = `{%s}`. Can't delete."), *FilePath);
+        return false;
+    }
+
+    // Delete the text file
+    if (!FileManager.Delete(*FilePath))
+    {
+        UE_LOG(Serializer, Warning, TEXT("Can't delete file at path = `{%s}`"), *FilePath);
+        return false;
+    }
+
+    UE_LOG(Serializer, Log, TEXT("Deleted file {%s}"), *FilePath);
+    
+    return true;
+}
+
 //
 // ACTOR PROXIES
 //

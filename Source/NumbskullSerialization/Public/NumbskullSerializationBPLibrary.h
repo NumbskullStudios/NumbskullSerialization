@@ -94,6 +94,8 @@ public:
      */
     static bool SaveArchiveToDiskCompressed(const FString& InFileName, FBufferArchive InArchive);
     
+    static bool DeleteFile(const FString& FilePath);
+    
 public:
     
     //
