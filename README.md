@@ -47,7 +47,7 @@ virtual void OnLoad_Implementation(const FString& GameName) override;
 
 ```
 FObjectData ObjectData;
-UNumbskullSerializationBPLibrary::SaveObject(this, GameData);
+UNumbskullSerializationBPLibrary::SaveObject(this, ObjectData);
 UNumbskullSerializationBPLibrary::SaveObjectDataToDisk(GameName + TEXT("MyFile.dat"), ObjectData);
 ```
 
@@ -55,7 +55,7 @@ UNumbskullSerializationBPLibrary::SaveObjectDataToDisk(GameName + TEXT("MyFile.d
 
 ```
 FObjectData ObjectData;
-UNumbskullSerializationBPLibrary::LoadObjectDataFromDisk(GameName + TEXT("MyFile.dat"), GameData);
+UNumbskullSerializationBPLibrary::LoadObjectDataFromDisk(GameName + TEXT("MyFile.dat"), ObjectData);
 UNumbskullSerializationBPLibrary::LoadObject(this, ObjectData);
 ```
 
@@ -73,7 +73,7 @@ virtual void OnLoad_Implementation(const FString& GameName) override;
 
 ```
 FObjectData ObjectData;
-UNumbskullSerializationBPLibrary::SaveActorData(this, GameData);
+UNumbskullSerializationBPLibrary::SaveActorData(this, ObjectData);
 UNumbskullSerializationBPLibrary::SaveActorDataToDisk(GameName + TEXT("MyFile.dat"), ObjectData);
 ```
 
@@ -81,7 +81,7 @@ UNumbskullSerializationBPLibrary::SaveActorDataToDisk(GameName + TEXT("MyFile.da
 
 ```
 FObjectData ObjectData;
-UNumbskullSerializationBPLibrary::LoadActorDataFromDisk(GameName + TEXT("MyFile.dat"), GameData);
+UNumbskullSerializationBPLibrary::LoadActorDataFromDisk(GameName + TEXT("MyFile.dat"), ObjectData);
 UNumbskullSerializationBPLibrary::LoadActorData(this, ObjectData);
 ```
 
