@@ -36,6 +36,7 @@ These storage types can be easily saved with `SaveActorProxyToDisk`, `SaveActorD
 ## How To Use (Object Data)
 
 - Include `NumbskullSerializationBPLibrary.h`
+- Include `Serializable.h`
 - Add the `ISerializable` interface to your class
 - Declare in the header
 
@@ -62,6 +63,7 @@ UNumbskullSerializationBPLibrary::LoadObject(this, ObjectData);
 ## How To Use (Actor Data)
 
 - Include `NumbskullSerializationBPLibrary.h`
+- Include `Serializable.h`
 - Add the `ISerializable` interface to your class
 - Declare in the header
 
@@ -93,6 +95,7 @@ The intended use is for dynamically spawned enemies or equipment on the player l
 It's best practice for an object like the `GameMode` to save and load these objects as, while a dynamically created object can save itself, they can't load themselves as they won't exist on new level loads.
 
 - Include `NumbskullSerializationBPLibrary.h`
+- Include `Serializable.h`
 - Add the `ISerializable` interface to your class
 - Declare in the header
 
@@ -128,6 +131,7 @@ ActorToLoad->AnyMethodAsTheActorIsLoaded();
 
 ```
 #include "NumbskullSerializationBPLibrary.h"
+#include "Serializable.h"
 
 class AMyActor : AActor, ISerializable
 {
